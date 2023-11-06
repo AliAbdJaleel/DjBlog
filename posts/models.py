@@ -18,6 +18,7 @@ class Posts(models.Model):
     draft = models.BooleanField(default=True)
     publish_date = models.DateTimeField(default=timezone.now)
     image = models.ImageField(upload_to='post')
+    category = models.ForeignKey('Category',related_name='post_category',on_delete=models.SET_NULL,null=True)
     #file = models.FileField()
    # publish_date2 = models.DateTimeField(auto_now= True) # يتم انشاء عمود ياخذ تاريخ و وقت ادراج القيد دون ان يظهر للمستخدم
    # publish_date3 = models.DateTimeField(auto_now_add= True) # يتم انشاء عمود ياخذ تاريخ و وقت تحديث القيد دون ان يظهر للمستخدم
@@ -26,3 +27,7 @@ class Posts(models.Model):
 
     def __str__(self):
         return self.title
+    
+
+    class Category(models.Model):
+        name = models.CharField(max_length=100)

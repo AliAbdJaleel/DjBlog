@@ -1,6 +1,7 @@
 from django.db import models
 from taggit.managers import TaggableManager
 from django.utils import timezone
+from django.contrib.auth.models import User
 # Create your models here.
 '''
 
@@ -11,11 +12,13 @@ from django.utils import timezone
 
 
 class Posts(models.Model):
+    auther = models.ForeignKey(User,related_name='post_auther',on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     content = models.TextField(max_length=20000)
     draft = models.BooleanField(default=True)
     publish_date = models.DateTimeField(default=timezone.now)
     image = models.ImageField(upload_to='post')
+    #file = models.FileField()
    # publish_date2 = models.DateTimeField(auto_now= True) # يتم انشاء عمود ياخذ تاريخ و وقت ادراج القيد دون ان يظهر للمستخدم
    # publish_date3 = models.DateTimeField(auto_now_add= True) # يتم انشاء عمود ياخذ تاريخ و وقت تحديث القيد دون ان يظهر للمستخدم
 

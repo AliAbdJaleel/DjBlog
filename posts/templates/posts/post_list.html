@@ -1,0 +1,15 @@
+<h4>Blog</h4>
+
+<ul>
+
+{% for post in ali  %}
+
+  <li> {{post.title}} -- {{post.auther}} -- {{post.publish_date}} 
+       <br> {{post.content}} 
+       <br>
+   
+  </li>  
+
+    {% endfor %}
+
+</ul>

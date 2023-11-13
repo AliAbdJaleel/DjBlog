@@ -3,7 +3,7 @@ from .models import Posts
 # Create your views here.
 
 
-def post_list(request):
+""" def post_list(request):
 
     data = Posts.objects.all() # هنا قمنا بانشاء نسخة من الكلاس ونجلب جميع البيانات في لست
     context = {
@@ -19,3 +19,16 @@ def post_detail(request,post_id):
         'post': data
     }
     return render(request,'posts/post_detail.html',context)
+ """
+
+
+from django.views.generic import ListView , DetailView
+
+
+class PostList(ListView):
+    model = Posts
+
+
+class PostDetail(DetailView):
+
+    model = Posts

@@ -2,14 +2,15 @@
 
 <ul>
 
-{% for post in ali  %}
+<!-- posts_list or object_list -->
+
+{% for post in posts_list  %}  
 
   <li> 
   <!--   {{post.title}} -- {{post.auther}} -- {{post.publish_date}} 
        <br> {{post.content}} 
        <br> -->
    |<a href="/posts/{{post.id}}"> {{post}}</a>
-
 
 
   </li>  

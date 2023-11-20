@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render , redirect
 from .models import Posts
 
 from .forms import PostForm
@@ -11,6 +11,7 @@ def creatpost(request):
         form = PostForm(request.POST,request.FILES)
         if form.is_valid():
             form.save()
+            return redirect('/posts/')
     else:
         form = PostForm
     return render(request,'posts/new.html',{'form':form})

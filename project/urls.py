@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path , include
 
-from posts.views import PostDetail , PostList
+from posts.views import PostDetail , PostList,creatpost
 
 from django.conf import settings
 from django.conf.urls.static import static
@@ -25,6 +25,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('posts/',PostList.as_view()),
+     path('posts/new',creatpost),
     path('posts/<int:pk>',PostDetail.as_view()),
     path('summernote/', include('django_summernote.urls')),
 ]

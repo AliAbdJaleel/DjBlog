@@ -6,15 +6,35 @@ from .forms import PostForm
 
 
 def creatpost(request):
-
     if request.method == 'POST':
         form = PostForm(request.POST,request.FILES)
         if form.is_valid():
-            form.save()
+            myform = form.save(commit=False)
+            myform.auther = request.user
+            myform.save()
             return redirect('/posts/')
     else:
         form = PostForm
     return render(request,'posts/new.html',{'form':form})
+
+def Editpost(request,pk):
+    post = Posts.objects.get(id=pk )
+    if request.method == 'POST':
+        form = PostForm(request.POST,request.FILES,instance=post)
+        if form.is_valid():
+            myform = form.save(commit=False)
+            myform.auther = request.user
+            myform.save()
+            return redirect('/posts/')
+    else:
+        form = PostForm(instance=post)
+    return render(request,'posts/edit.html',{'form':form})
+
+
+def deletePost(request,pk):
+    post = Posts.objects.get(id=pk)
+    post.delete()
+    return redirect('/posts/')
 
 
 """ def post_list(request):
@@ -36,7 +56,7 @@ def post_detail(request,post_id):
  """
 
 
-from django.views.generic import ListView , DetailView
+from django.views.generic import ListView , DetailView , CreateView , DeleteView , UpdateView
 
 
 class PostList(ListView):
@@ -46,3 +66,20 @@ class PostList(ListView):
 class PostDetail(DetailView):
 
     model = Posts
+
+
+
+
+class PostCreate(CreateView):
+    model = Posts
+    fields = '__all__'
+    success_url = '/posts/'
+
+class EditPost(UpdateView):
+    model = Posts
+    fields = '__all__'
+    success_url = '/posts/'
+    template_name = 'posts/edit.html'
+
+
+

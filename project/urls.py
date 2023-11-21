@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path , include
 
-from posts.views import PostDetail , PostList,creatpost
+from posts.views import PostDetail , PostList,PostCreate,EditPost,creatpost,deletePost,Editpost
 
 from django.conf import settings
 from django.conf.urls.static import static
@@ -25,8 +25,13 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('posts/',PostList.as_view()),
-     path('posts/new',creatpost),
+     #path('posts/new',creatpost),
+     path('posts/new',PostCreate.as_view()),
+    
     path('posts/<int:pk>',PostDetail.as_view()),
+     #path('posts/<int:pk>/edit',Editpost),
+    path('posts/<int:pk>/edit',EditPost.as_view()),
+    path('posts/<int:pk>/delete',deletePost),
     path('summernote/', include('django_summernote.urls')),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

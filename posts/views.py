@@ -81,5 +81,8 @@ class EditPost(UpdateView):
     success_url = '/posts/'
     template_name = 'posts/edit.html'
 
+class DeletePost(DeleteView):
+    model = Posts
+    success_url = '/posts/'
 
 

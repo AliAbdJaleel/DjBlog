@@ -17,22 +17,23 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path , include
 
-from posts.views import PostDetail , PostList,PostCreate,EditPost,DeletePost , creatpost,Editpost,deletePost
+from posts.views import  creatpost,Editpost,deletePost,post_list,post_detail
 
 from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('posts/',PostList.as_view()),
-     #path('posts/new',creatpost),
-     path('posts/new',PostCreate.as_view()),
-    
-    path('posts/<int:pk>',PostDetail.as_view()),
-     #path('posts/<int:pk>/edit',Editpost),
-    path('posts/<int:pk>/edit',EditPost.as_view()),
-    #path('posts/<int:pk>/delete',deletePost),
-    path('posts/<int:pk>/delete',DeletePost.as_view()),
+    #path('posts/',PostList.as_view()),
+    #path('posts/new',PostCreate.as_view()),
+    #path('posts/<int:pk>',PostDetail.as_view()),
+     #path('posts/<int:pk>/edit',EditPost.as_view()),
+     #path('posts/<int:pk>/delete',DeletePost.as_view()),
+    path('posts/',post_list),
+    path('posts/new',creatpost),
+    path('posts/<int:pk>',post_detail),
+    path('posts/<int:pk>/edit',Editpost),
+    path('posts/<int:pk>/delete',deletePost),
     path('summernote/', include('django_summernote.urls')),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

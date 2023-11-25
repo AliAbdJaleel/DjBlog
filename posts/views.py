@@ -1,6 +1,5 @@
 from django.shortcuts import render , redirect
 from .models import Posts
-
 from .forms import PostForm
 # Create your views here.
 
@@ -15,7 +14,7 @@ def creatpost(request):
             return redirect('/posts/')
     else:
         form = PostForm
-    return render(request,'posts/new.html',{'form':form})
+    return render(request,'posts/posts_form.html',{'form':form})
 
 def Editpost(request,pk):
     post = Posts.objects.get(id=pk )
@@ -33,26 +32,27 @@ def Editpost(request,pk):
 
 def deletePost(request,pk):
     post = Posts.objects.get(id=pk)
-    post.delete()
-    return redirect('/posts/')
+    if request.method == 'POST':
+      post.delete()
+      return redirect('/posts/')
+    return render(request,'posts/posts_confirm_delete.html',{'post':post})
+    
 
 
 def post_list(request):
-
     data = Posts.objects.all() # هنا قمنا بانشاء نسخة من الكلاس ونجلب جميع البيانات في لست
     context = {
     'ali': data
     }
-    return render(request,'posts/post_list.html',context)
+    return render(request,'posts/posts_list.html',context)
 
 
-def post_detail(request,post_id):
-    data = Posts.objects.get(id=post_id )
-
+def post_detail(request,pk):
+    data = Posts.objects.get(id=pk )
     context = {
         'post': data
     }
-    return render(request,'posts/post_detail.html',context)
+    return render(request,'posts/posts_detail.html',context)
 
 
 

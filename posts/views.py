@@ -37,7 +37,7 @@ def deletePost(request,pk):
     return redirect('/posts/')
 
 
-""" def post_list(request):
+def post_list(request):
 
     data = Posts.objects.all() # هنا قمنا بانشاء نسخة من الكلاس ونجلب جميع البيانات في لست
     context = {
@@ -53,36 +53,9 @@ def post_detail(request,post_id):
         'post': data
     }
     return render(request,'posts/post_detail.html',context)
- """
-
-
-from django.views.generic import ListView , DetailView , CreateView , DeleteView , UpdateView
-
-
-class PostList(ListView):
-    model = Posts
-
-
-class PostDetail(DetailView):
-
-    model = Posts
 
 
 
 
-class PostCreate(CreateView):
-    model = Posts
-    fields = '__all__'
-    success_url = '/posts/'
-
-class EditPost(UpdateView):
-    model = Posts
-    fields = '__all__'
-    success_url = '/posts/'
-    template_name = 'posts/edit.html'
-
-class DeletePost(DeleteView):
-    model = Posts
-    success_url = '/posts/'
 
 

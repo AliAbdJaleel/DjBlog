@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path , include
 
-from posts.views import PostDetail , PostList,PostCreate,EditPost,creatpost,deletePost,Editpost,DeletePost
+from posts.views import PostDetail , PostList,PostCreate,EditPost,DeletePost , creatpost,Editpost,deletePost
 
 from django.conf import settings
 from django.conf.urls.static import static

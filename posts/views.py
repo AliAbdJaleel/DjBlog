@@ -1,5 +1,5 @@
 from django.shortcuts import render , redirect
-from .models import Posts
+from .models import Posts , Comment
 from .forms import PostForm
 # Create your views here.
 
@@ -49,8 +49,10 @@ def post_list(request):
 
 def post_detail(request,pk):
     data = Posts.objects.get(id=pk )
+    comments = Comment.objects.filter(post=data)
     context = {
-        'post': data
+        'post': data ,
+        'comments': comments
     }
     return render(request,'posts/posts_detail.html',context)
 

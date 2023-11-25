@@ -39,7 +39,7 @@ class Comment(models.Model):
     post = models.ForeignKey(Posts,related_name='comment_post',on_delete=models.CASCADE)
     user = models.CharField(max_length=50)
     comment = models.TextField(max_length=300)
-    created_at = models.DateTimeField(timezone.now)
+    created_at = models.DateTimeField(auto_now= True)
     
     def __str__(self):
         return str(self.post)

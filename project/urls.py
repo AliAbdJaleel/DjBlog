@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path , include
 
 from posts.views import  creatpost,Editpost,deletePost,post_list,post_detail
-
+from posts.api import post_list_api
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -34,6 +34,7 @@ urlpatterns = [
     path('posts/<int:pk>',post_detail),
     path('posts/<int:pk>/edit',Editpost),
     path('posts/<int:pk>/delete',deletePost),
+    path('posts/api',post_list_api),
     path('summernote/', include('django_summernote.urls')),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

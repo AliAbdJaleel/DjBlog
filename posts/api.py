@@ -5,7 +5,7 @@ from .models import Posts
 from .serializers import PostSerializer
 
 
-@api_view(['GET'])
+""" @api_view(['GET'])
 # دالة لتحويل البيانات الموجودة في جدول الى صيغة jason
 def post_list_api(request):
     data1 = Posts.objects.all()
@@ -18,8 +18,16 @@ def post_detail_api(request,id):
     data1 = Posts.objects.get(id=id)
     data2 = PostSerializer(data1).data
     return Response({'data2':data2})
+ """
 
 
 
+from rest_framework import generics
+class PostListAPI(generics.ListAPIView):
+    queryset =  Posts.objects.all()
+    serializer_class = PostSerializer
 
- 
+
+class PostDetailAPI(generics.RetrieveAPIView):
+    queryset = Posts.objects.all()
+    serializer_class = PostSerializer

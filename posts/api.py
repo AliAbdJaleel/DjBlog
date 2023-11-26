@@ -5,6 +5,8 @@ from .models import Posts
 from .serializers import PostSerializer
 
 
+#function based
+
 """ @api_view(['GET'])
 # دالة لتحويل البيانات الموجودة في جدول الى صيغة jason
 def post_list_api(request):
@@ -22,12 +24,29 @@ def post_detail_api(request,id):
 
 
 
+#CBV
+
 from rest_framework import generics
-class PostListAPI(generics.ListAPIView):
+
+""" class PostListAPI(generics.ListAPIView): # هذه الكلاس لاستعراض جميع القيود الموجودة في قاعدة البيانات
     queryset =  Posts.objects.all()
+    serializer_class = PostSerializer """
+
+
+""" class PostDetailAPI(generics.RetrieveAPIView):  # هذه الكلاس فقط لاستعراض القيد
+    queryset = Posts.objects.all()
+    serializer_class = PostSerializer """
+
+
+    
+
+class PostDetailAPI(generics.RetrieveUpdateDestroyAPIView): # هذه الكلاس لاستعراض البيانات و تعديلها و حذفها
+    queryset = Posts.objects.all()
     serializer_class = PostSerializer
 
 
-class PostDetailAPI(generics.RetrieveAPIView):
-    queryset = Posts.objects.all()
+
+
+class PostListAPI(generics.ListCreateAPIView):    # هذه الكلاس لاستعراض القيود الموجودة في قاعدة البيانات و الاضافة عليها
+    queryset =  Posts.objects.all()
     serializer_class = PostSerializer

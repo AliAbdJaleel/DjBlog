@@ -27,7 +27,8 @@ def post_detail_api(request,id):
 #CBV
 
 from rest_framework import generics
-
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import filters
 """ class PostListAPI(generics.ListAPIView): # هذه الكلاس لاستعراض جميع القيود الموجودة في قاعدة البيانات
     queryset =  Posts.objects.all()
     serializer_class = PostSerializer """
@@ -38,7 +39,7 @@ from rest_framework import generics
     serializer_class = PostSerializer """
 
 
-    
+# pip install -U drf-yasg   // مكتبة لعمل دوكيمنتيشن لاعطائه الى المستفيد من ال api
 
 class PostDetailAPI(generics.RetrieveUpdateDestroyAPIView): # هذه الكلاس لاستعراض البيانات و تعديلها و حذفها
     queryset = Posts.objects.all()
@@ -50,3 +51,6 @@ class PostDetailAPI(generics.RetrieveUpdateDestroyAPIView): # هذه الكلا�
 class PostListAPI(generics.ListCreateAPIView):    # هذه الكلاس لاستعراض القيود الموجودة في قاعدة البيانات و الاضافة عليها
     queryset =  Posts.objects.all()
     serializer_class = PostSerializer
+    filter_backends = [DjangoFilterBackend,filters.SearchFilter]
+    filterset_fields = ['category', 'auther']
+    search_fields = ['content', 'title']

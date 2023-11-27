@@ -51,6 +51,7 @@ class PostDetailAPI(generics.RetrieveUpdateDestroyAPIView): # هذه الكلا�
 class PostListAPI(generics.ListCreateAPIView):    # هذه الكلاس لاستعراض القيود الموجودة في قاعدة البيانات و الاضافة عليها
     queryset =  Posts.objects.all()
     serializer_class = PostSerializer
-    filter_backends = [DjangoFilterBackend,filters.SearchFilter]
+    filter_backends = [DjangoFilterBackend,filters.SearchFilter,filters.OrderingFilter]
     filterset_fields = ['category', 'auther']
     search_fields = ['content', 'title']
+    ordering_fields = ['publish_date']
